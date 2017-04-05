@@ -6,7 +6,7 @@ Created on 2017年4月4日
 '''
 from sqlalchemy import *
 import datetime
-
+from sqlalchemy.engine.result import RowProxy 
 class BaseObject(object):
     
     __slots__ = ('_prykeys')
@@ -101,7 +101,7 @@ class articleInfo(BaseObject):
     @classmethod
     def convertToArticle(cls,rss):
         rs = None
-        if rss and isinstance(rss, RowProxy,dict):
+        if rss and isinstance(rss, (RowProxy,dict)):
             rs = cls()
             for key,value in rss.items():
                 if isinstance(key, unicode):
@@ -109,4 +109,34 @@ class articleInfo(BaseObject):
                 if isinstance(value, unicode):
                     value = value.encode('utf-8')
                 rs.setPrTy(key,value)
-        return rs                                                         
+        return rs          
+    
+    def setPrTy(self,key,value):
+        """
+        设置直博内容的某一个属性
+        @key    type:str 
+            直博内容的属性名称
+        @value  type:依据属性的值的属性做判断
+            直博内容属性的值
+        """
+        flag = False
+        try:
+            setattr(self,key,value)
+            flag = True
+        except Exception,data:
+            print data
+        return flag
+    
+    def getPrTy(self,key):
+        """
+        取得直博内容的某一个属性值
+        @key    type:str 
+            直博内容的属性名称
+        """
+        
+        try:
+            rs = getattr(self,key)
+        except Exception,data:
+            print data
+            rs = None
+        return rs

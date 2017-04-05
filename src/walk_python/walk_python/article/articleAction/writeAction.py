@@ -9,10 +9,12 @@ import datetime
 from django import forms
 #from django.forms.models import cleaned_data
 from walk_python.article.blogDomain import articleDomain
-from django.template import RequestContext,Template
+from django.template import RequestContext
+
 def startWrite(request):
+    print 'test>>>>>'
     now = datetime.datetime.now()    
-    return render_to_response('article/article_write.html',{'test':now})
+    return render_to_response('article/article_write.html',{'test':now},context_instance=RequestContext(request))
 
 class WriteArticle(forms.Form):
     print 'start here.........'
@@ -39,12 +41,16 @@ class WriteArticle(forms.Form):
     
 def articleCreate(request):
     print 'articleCreate start....'
-    article = WriteArticle(request.POST)
-    flag = article.is_valid()
+
+    form = WriteArticle(request.POST)
+    flag = form.is_valid()
     print (flag)
     if flag:
-        ac = article.cleaned_data
-        ta = articleDomain.article.convertToArticle(ac)
-        print 'I am author : %s',ta.author
-    context = RequestContext(request,'test') 
-    return HttpResponse(template.render(context))
+        ac = form.cleaned_data
+        ta = articleDomain.articleInfo.convertToArticle(ac)
+        print '>>>>>'
+        print (dir(ta))
+        print (ta.getPrTy('author'))
+        print '......'
+
+    return render_to_response('test/test.html',{'test':'test'},context_instance=RequestContext(request))
