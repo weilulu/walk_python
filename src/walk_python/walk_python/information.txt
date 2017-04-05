@@ -1,0 +1,2 @@
+python version:2.7.6
+django version:1.7.6
