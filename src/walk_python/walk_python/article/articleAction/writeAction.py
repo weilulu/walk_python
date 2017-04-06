@@ -9,6 +9,9 @@ import datetime
 from django import forms
 #from django.forms.models import cleaned_data
 from walk_python.article.blogDomain import articleDomain
+from walk_python.article.blogDomain.articleDomain import articleInfo
+from walk_python.article.articleService import service
+from walk_python.article.utils import StringUtil
 from django.template import RequestContext
 
 def startWrite(request):
@@ -48,9 +51,11 @@ def articleCreate(request):
     if flag:
         ac = form.cleaned_data
         ta = articleDomain.articleInfo.convertToArticle(ac)
-        print '>>>>>'
-        print (dir(ta))
-        print (ta.getPrTy('author'))
-        print '......'
-
+        c = ta
+        StringUtil.escapeScript(c)
+        ta.setPrTy('content',c)
+        last_id = service.saveArticle(ta)
+        
     return render_to_response('test/test.html',{'test':'test'},context_instance=RequestContext(request))
+
+    

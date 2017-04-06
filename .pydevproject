@@ -8,5 +8,6 @@
 </pydev_variables_property>
 <pydev_pathproperty name="org.python.pydev.PROJECT_SOURCE_PATH">
 <path>/walk_python/src</path>
+<path>/${PROJECT_DIR_NAME}/walk_python.walk_python.article.articleUtil</path>
 </pydev_pathproperty>
 </pydev_project>
