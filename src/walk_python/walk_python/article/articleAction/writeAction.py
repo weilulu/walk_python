@@ -2,7 +2,7 @@
 '''
 Created on 2017年4月3日
 
-@author: Administrator
+@author: W.lu
 '''
 from django.shortcuts import render_to_response
 import datetime
@@ -11,7 +11,7 @@ from django import forms
 from walk_python.article.blogDomain import articleDomain
 from walk_python.article.blogDomain.articleDomain import articleInfo
 from walk_python.article.articleService import service
-from walk_python.article.utils import StringUtil
+from walk_python.utils import StringUtil
 from django.template import RequestContext
 
 def startWrite(request):
@@ -53,7 +53,7 @@ def articleCreate(request):
         ta = articleDomain.articleInfo.convertToArticle(ac)
         c = ta
         StringUtil.escapeScript(c)
-        ta.setPrTy('content',c)
+        ta.setPrTy('content',StringUtil._getSummary(c))
         last_id = service.saveArticle(ta)
         
     return render_to_response('test/test.html',{'test':'test'},context_instance=RequestContext(request))

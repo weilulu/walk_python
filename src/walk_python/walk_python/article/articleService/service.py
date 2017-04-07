@@ -2,7 +2,7 @@
 '''
 Created on 2017年4月3日
 
-@author: 01158130
+@author: W.lu
 '''
 from walk_python.article.articleDao import articleDao
 

@@ -2,7 +2,7 @@
 '''
 Created on 2017年4月2日
 
-@author: Administrator
+@author: W.lu
 '''
 
 from django.conf.urls import patterns

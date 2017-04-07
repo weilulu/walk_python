@@ -1,8 +1,8 @@
 #-*- coding : UTF-8 -*-
 '''
-Created on 2017å¹´4æœˆ6æ—¥
+Created on 2017Äê4ÔÂ3ÈÕ
 
-@author: Administrator
+@author: W.lu
 '''
 
 def saveArticle(articleParam):

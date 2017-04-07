@@ -2,7 +2,7 @@
 '''
 Created on 2017年4月4日
 
-@author: Administrator
+@author: W.lu
 '''
 from datetime import datetime
 from sqlalchemy.engine.result import RowProxy 
