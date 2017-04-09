@@ -8,7 +8,9 @@ from walk_python.article.articleDao import articleDao
 
 def saveArticle(articleParam):
     if articleParam and articleParam.is_init:
-        articleDao.saveArticle(articleParam)
-        
+        last_id = articleDao.saveArticle(articleParam)
+        if last_id:
+            return last_id
+    return None    
     
         

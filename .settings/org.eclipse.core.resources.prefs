@@ -1,9 +1,0 @@
-eclipse.preferences.version=1
-encoding//src/walk_python/walk_python/article/articleAction/writeAction.py=UTF-8
-encoding//src/walk_python/walk_python/article/articleService/service.py=UTF-8
-encoding//src/walk_python/walk_python/article/articleUrls.py=UTF-8
-encoding//src/walk_python/walk_python/article/blogDomain/articleDomain.py=UTF-8
-encoding//src/walk_python/walk_python/dbtables/models.py=UTF-8
-encoding//src/walk_python/walk_python/utils/StringUtil.py=UTF-8
-encoding//src/walk_python/walk_python/utils/textrank4zh/__init__.py=utf-8
-encoding//src/walk_python/walk_python/utils/textrank4zh/util.py=utf-8

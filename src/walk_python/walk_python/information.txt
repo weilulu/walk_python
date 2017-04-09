@@ -1,2 +1,6 @@
 python version:2.7.6
 django version:1.7.6
+beautifulsoup4-4.5.3(not used)
+BeautifulSoup-3.2.1
+textrank4zh:0.3
+SQLAlchemy:1.1.9

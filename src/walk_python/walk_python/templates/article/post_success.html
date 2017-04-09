@@ -34,9 +34,12 @@
 
     <div class="container">
 
-     #if($result == 1)
-     POST SUCCESS!
-     #end
+     #if($last_id == 1)
+     {% if last_id %}
+       POST SUCCESS!
+     {% else %}
+       POST FAIL!!! 
+     {% endif %}
 
     </div> <!-- /container -->
 

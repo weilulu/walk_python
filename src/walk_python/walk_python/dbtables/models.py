@@ -107,6 +107,18 @@ def executeInsertSql(sql,conn=None):
                 rs = conn.excute(sql)
             except Exception,data:
                 print data
-                print 'exc'            
+                print 'excute insert(update) sql exception!!!'
+                rs = None
+            finally:
+                closeConnection(conn)
+            if rs:
+                return rs
+    return None            
+
+
+
+articleW = metaWrite.tables['article_info']
+articleR = metaRead.tables['article_info']
+
 if __name__ == '__main__':
     pass

@@ -33,6 +33,11 @@ class BaseObject(object):
         """
         if key in self.__slots__:
             vType = self._prykeys[key]
+            if key == 'summary':
+                print type(value)
+            if key == 'content':
+                print type(value)
+            print isinstance(value, vType)
             if isinstance(value,vType) or (value is None and vType in (str,datetime)):
                 object.__setattr__(self,key,value)
                 if key != 'is_init' and 'is_init' in self.__slots__:
@@ -89,8 +94,8 @@ class BaseObject(object):
         return rs
      
 class articleInfo(BaseObject):
-    __slots__=('id','title','type','author','summary','post_time','is_init','_prykeys')
-    _prykeys={'id':(int,long),'title':str,'type':(int,long),'author':str,'summary':str,'post_time':datetime,'_prykeys':dict,'is_init':bool}
+    __slots__=('id','title','type','author','summary','content','post_time','is_init','_prykeys')
+    _prykeys={'id':(int,long),'title':str,'type':(int,long),'author':str,'summary':str,'content':str,'post_time':datetime,'_prykeys':dict,'is_init':bool}
     
     def __init__(self):
         BaseObject.__init__(self)
@@ -99,6 +104,7 @@ class articleInfo(BaseObject):
         self.type = 0
         self.author = ''
         self.summary = ''
+        self.content = ''
         self.post_time = None
         self.is_init = True       
         
@@ -157,9 +163,10 @@ class articleInfo(BaseObject):
             #keys.remove('is_init')
             keys.remove('_prykeys')
             keys.remove('summary')
+            keys.remove('content')
             keys.remove('id')
             return keys
         else:
-            keys = ['id','summary']
+            keys = ['id','summary','content']
             return keys
     
