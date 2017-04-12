@@ -22,8 +22,7 @@ def escapeScript(sourceString):
  
 def genSummary(stringInfo):
     text = codecs.encode(stringInfo, 'gbk')
-    print text
-    tr4s = TextRank4Sentence(stop_words_file = 'D:/Workspaces/walk_python/src/walk_python/walk_python/utils/textrank4zh/stopwords.txt')
+    tr4s = TextRank4Sentence(stop_words_file = 'D:/workspace/walk_python/src/walk_python/walk_python/utils/textrank4zh/stopwords.txt')
     tr4s.analyze(text,lower = True)
     s_list = tr4s.get_key_sentences(num=1,sentence_min_len=5)
     #print 'sumarry result : %s' % (s_list[0].sentence.encode('gbk'))

@@ -7,6 +7,7 @@ Created on 2017.4.7
 from sqlalchemy import create_engine,MetaData
 from sqlalchemy.sql.expression import Select,CompoundSelect,Insert,Update,Delete
 from sqlalchemy.engine.result import RowProxy
+from sqlalchemy.sql import text
 
 dbr = create_engine("mysql://root:root@127.0.0.1:3306/walk-management",pool_size=50,max_overflow=100,echo=True,pool_timeout=10)
 dbw = create_engine("mysql://root:root@127.0.0.1:3306/walk-management",pool_size=50,max_overflow=100,echo=True,pool_timeout=10)
@@ -50,17 +51,18 @@ def closeConnection(conn,readed=False):
 def connectionFunctionNew(isRead=False,connectionKey='conn'):
     def connectionFunc(func):
         def Func(*args,**argss):
-            conn = getConnection(isRead)
-            argss[connectionKey] = conn
-            dd = func(*args,**argss)
-            closeConnection(conn)
+            try:
+                conn = getConnection(isRead)
+                argss[connectionKey] = conn
+                dd = func(*args,**argss)
+                closeConnection(conn)
+            except Exception,data:
+                print data
             return dd
         return Func
     return connectionFunc
 @connectionFunctionNew(False, 'conn')
 def executeSelectSql(selectSql,isFetchAll=False,conn=None,defaultReturn=None):
-    from __builtin__ import str
-    from _ast import Str
     if selectSql:
         if isinstance(selectSql,Select) or isinstance(selectSql,CompoundSelect):
             if conn:
@@ -90,16 +92,16 @@ def executeSelectSql(selectSql,isFetchAll=False,conn=None,defaultReturn=None):
                                 trs = {}
                                 for k,v in val.items():
                                     if isinstance(k,unicode):
-                                        k = Str(k)
+                                        k = str(k)
                                     trs[k] = v
                                 if trs:
                                     rs.append(trs)
                         return rs
                     return rss
                 return defaultReturn
+            
 @connectionFunctionNew(True, 'conn')
 def executeInsertSql(sql,conn=None):
-    from cgitb import text
     if sql and isinstance(sql, Insert,Update,str,Delete):
         if conn:
             rs = None

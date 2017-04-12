@@ -164,5 +164,7 @@ class articleInfo(BaseObject):
         else:
             #keys = ['id']
             keys = self._prykeys.keys();
+            keys.remove('id')
+            keys.remove('post_time')
             return keys
     
