@@ -8,8 +8,8 @@ from sqlalchemy import create_engine,MetaData
 from sqlalchemy.sql.expression import Select,CompoundSelect,Insert,Update,Delete
 from sqlalchemy.engine.result import RowProxy
 
-dbr = create_engine("mysql://root:root@localhost:3306/walk-management?charset=utf8",pool_size=50,max_overflow=100,echo=True,pool_timeout=10,echo_pool=False,pool_recycle=3600)
-dbw = create_engine("mysql://root:root@localhost:3306/walk-management?charset=utf8",pool_size=50,max_overflow=100,echo=False,pool_timeout=10,echo_pool=False,pool_recycle=3600)
+dbr = create_engine("mysql://root:root@127.0.0.1:3306/walk-management",pool_size=50,max_overflow=100,echo=True,pool_timeout=10)
+dbw = create_engine("mysql://root:root@127.0.0.1:3306/walk-management",pool_size=50,max_overflow=100,echo=True,pool_timeout=10)
 
 metaRead = MetaData(bind=dbr,reflect=True)
 metaWrite = metaRead
@@ -26,13 +26,15 @@ def getConnection(readed=False):
     db = getDB(readed)
     if db:
         try:
-            conn = db.conn()
-            conn.ping(True)
-        except:
+            print(dir(db))
+            conn = db.connect
+            #conn.ping(True)
+        except Exception,data:
+            print data
             if readed:
                 print 'dbw cannot connection!'
             else:
-                print 'dbw cannot connection!'
+                print 'dbr cannot connection!'
             conn = None
     else:
         print 'get DB wrong!'

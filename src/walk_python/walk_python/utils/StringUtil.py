@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 '''
-Created on 2017年4月3日
+Created on 2017.4.3
 
 @author: W.lu
 '''
@@ -11,19 +11,26 @@ from textrank4zh import TextRank4Sentence
 import codecs
 
 def escapeScript(sourceString):
+    from __builtin__ import str
     soup = BeautifulSoup(sourceString)
     [s.extract() for s in soup('script')]
-    print 'soup result : %s' % (soup)
-    return soup
+    #print 'soup result : %s' % str(soup)
+    if soup:
+        return str(soup)
+    else:
+        return ''
  
 def genSummary(stringInfo):
     text = codecs.encode(stringInfo, 'gbk')
     print text
-    tr4s = TextRank4Sentence(stop_words_file = 'D:/workspace/walk_python/src/walk_python/walk_python/utils/textrank4zh/stopwords.txt')
+    tr4s = TextRank4Sentence(stop_words_file = 'D:/Workspaces/walk_python/src/walk_python/walk_python/utils/textrank4zh/stopwords.txt')
     tr4s.analyze(text,lower = True)
     s_list = tr4s.get_key_sentences(num=1,sentence_min_len=5)
-    print 'sumarry result : %s' % (s_list[0].sentence)
-    return s_list[0].sentence;
+    #print 'sumarry result : %s' % (s_list[0].sentence.encode('gbk'))
+    if s_list[0].sentence:
+        return s_list[0].sentence.encode('gbk')
+    else:
+        return ''
 
 
 if __name__ == '__main__':
@@ -33,4 +40,6 @@ if __name__ == '__main__':
     <script>b</script>
     <h1>hi, world</h1>
     '''
-    genSummary(escapeScript(sourceString))    
+    #string = genSummary(sourceString)
+    string = escapeScript(sourceString)
+    print(type(str(string)))    

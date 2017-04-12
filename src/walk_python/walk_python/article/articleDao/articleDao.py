@@ -6,10 +6,11 @@ Created on 2017.4.3
 '''
 
 from walk_python.dbtables import models
+from walk_python.article.blogDomain.articleDomain import articleInfo
 
 def saveArticle(articleParam):
-    if not articleParam.is_init:
-        dd = articleParam.convertToDict(keyList=articleParam.getDictKeys())
+    if articleParam and isinstance(articleParam,articleInfo):
+        dd = articleParam.convertToDict(keyList=articleParam.getDictKeys(False))
         selSql = models.articleW.insert().values(dd)
         rss = models.executeInsertSql(selSql)
         if rss:

@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 '''
-Created on 2017年4月4日
+Created on 2017.4.4
 
 @author: W.lu
 '''
@@ -33,11 +33,6 @@ class BaseObject(object):
         """
         if key in self.__slots__:
             vType = self._prykeys[key]
-            if key == 'summary':
-                print type(value)
-            if key == 'content':
-                print type(value)
-            print isinstance(value, vType)
             if isinstance(value,vType) or (value is None and vType in (str,datetime)):
                 object.__setattr__(self,key,value)
                 if key != 'is_init' and 'is_init' in self.__slots__:
@@ -95,7 +90,7 @@ class BaseObject(object):
      
 class articleInfo(BaseObject):
     __slots__=('id','title','type','author','summary','content','post_time','is_init','_prykeys')
-    _prykeys={'id':(int,long),'title':str,'type':(int,long),'author':str,'summary':str,'content':str,'post_time':datetime,'_prykeys':dict,'is_init':bool}
+    _prykeys={'id':(int,long),'title':str,'type':(int,long),'author':str,'summary':str,'content':str,'post_time':datetime,'is_init':bool,'_prykeys':dict}
     
     def __init__(self):
         BaseObject.__init__(self)
@@ -106,7 +101,7 @@ class articleInfo(BaseObject):
         self.summary = ''
         self.content = ''
         self.post_time = None
-        self.is_init = True       
+        self.is_init = True     
         
     @classmethod
     def convertToArticle(cls,rss):
@@ -162,11 +157,12 @@ class articleInfo(BaseObject):
             keys = self._prykeys.keys()
             #keys.remove('is_init')
             keys.remove('_prykeys')
-            keys.remove('summary')
-            keys.remove('content')
+            #keys.remove('summary')
+            #keys.remove('content')
             keys.remove('id')
             return keys
         else:
-            keys = ['id','summary','content']
+            #keys = ['id']
+            keys = self._prykeys.keys();
             return keys
     
