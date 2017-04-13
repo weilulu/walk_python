@@ -62,6 +62,8 @@ def articleCreate(request):
     
 def getArticle(request):
     article_id = forms.IntegerField()
-    service.getArticleById(article_id)
+    result = service.getArticleById(article_id)
+    if result:
+        
     
     
