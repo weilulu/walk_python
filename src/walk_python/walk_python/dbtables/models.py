@@ -27,8 +27,7 @@ def getConnection(readed=False):
     db = getDB(readed)
     if db:
         try:
-            print(dir(db))
-            conn = db.connect
+            conn = db.connect()
             #conn.ping(True)
         except Exception,data:
             print data
@@ -48,19 +47,38 @@ def closeConnection(conn,readed=False):
             conn.close()
     else:
         print 'the connection is NULL!!!' 
+        
 def connectionFunctionNew(isRead=False,connectionKey='conn'):
     def connectionFunc(func):
         def Func(*args,**argss):
-            try:
-                conn = getConnection(isRead)
-                argss[connectionKey] = conn
-                dd = func(*args,**argss)
-                closeConnection(conn)
-            except Exception,data:
-                print data
+            conn = getConnection(isRead)
+            argss[connectionKey] = conn
+            dd = func(*args,**argss)
+            closeConnection(conn)
             return dd
         return Func
     return connectionFunc
+
+@connectionFunctionNew(True, 'conn')
+def executeInsertSql(selSql,conn=None):
+    if isinstance(selSql,(Insert,Update,str,Delete)):
+        if conn:
+            rs = None
+            try:
+                if isinstance(selSql, str):
+                    selSql = text(selSql)
+                rs = conn.execute(selSql)
+            except Exception,data:
+                print data
+                print 'excute insert(update) sql exception!!!'
+                rs = None
+            finally:
+                closeConnection(conn)
+            if rs:
+                return rs
+    return None            
+
+
 @connectionFunctionNew(False, 'conn')
 def executeSelectSql(selectSql,isFetchAll=False,conn=None,defaultReturn=None):
     if selectSql:
@@ -100,26 +118,6 @@ def executeSelectSql(selectSql,isFetchAll=False,conn=None,defaultReturn=None):
                     return rss
                 return defaultReturn
             
-@connectionFunctionNew(True, 'conn')
-def executeInsertSql(sql,conn=None):
-    if sql and isinstance(sql, Insert,Update,str,Delete):
-        if conn:
-            rs = None
-            try:
-                if isinstance(sql, str):
-                    sql = text(sql)
-                rs = conn.excute(sql)
-            except Exception,data:
-                print data
-                print 'excute insert(update) sql exception!!!'
-                rs = None
-            finally:
-                closeConnection(conn)
-            if rs:
-                return rs
-    return None            
-
-
 
 articleW = metaWrite.tables['article_info']
 articleR = metaRead.tables['article_info']

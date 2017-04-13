@@ -30,9 +30,9 @@ class WriteArticle(forms.Form):
         title = cleaned_data.get('title')
         if not title:
             self._errors['title'] = 'title is empty!'
-        type = cleaned_data.get('type')
-        if not isinstance(type, (int,long)):
-            type = 0    #default value 0
+        article_type = cleaned_data.get('article_type')
+        if not isinstance(article_type, (int,long)):
+            article_type = 0    #default value 0
         author = cleaned_data.get('author')
         if not author:
             self._errors['author'] = 'author is empty!'
@@ -60,5 +60,6 @@ def articleCreate(request):
         
     return render_to_response('article/post_success.html',{'last_id':last_id},context_instance=RequestContext(request))
     
-
+def articleInfo(request):
+    
     
