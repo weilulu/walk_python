@@ -60,6 +60,8 @@ def articleCreate(request):
         
     return render_to_response('article/post_success.html',{'last_id':last_id},context_instance=RequestContext(request))
     
-def articleInfo(request):
+def getArticle(request):
+    article_id = forms.IntegerField()
+    service.getArticleById(article_id)
     
     
