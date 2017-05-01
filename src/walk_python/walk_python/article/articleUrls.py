@@ -6,10 +6,10 @@ Created on 2017年4月2日
 '''
 
 from django.conf.urls import patterns
-from walk_python.article.articleAction import writeAction
+from walk_python.article.articleAction import WriteArticle
 
 urlpatterns = patterns('',
-                       (r'^startWrite',writeAction.startWrite),
-                       (r'^write',writeAction.articleCreate),
+                       (r'^startWrite',WriteArticle.startWrite),
+                       (r'^write',WriteArticle.articleCreate),
                        )
 

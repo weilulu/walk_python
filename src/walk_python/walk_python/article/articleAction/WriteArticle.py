@@ -7,7 +7,6 @@ Created on 2017.4.3
 from django.shortcuts import render_to_response
 import datetime
 from django import forms
-#from django.forms.models import cleaned_data
 from walk_python.article.blogDomain import articleDomain
 from walk_python.article.blogDomain.articleDomain import articleInfo
 from walk_python.article.articleService import service
@@ -30,9 +29,9 @@ class WriteArticle(forms.Form):
         title = cleaned_data.get('title')
         if not title:
             self._errors['title'] = 'title is empty!'
-        article_type = cleaned_data.get('article_type')
-        if not isinstance(article_type, (int,long)):
-            article_type = 0    #default value 0
+        type = cleaned_data.get('type')
+        if not isinstance(type, (int,long)):
+            type = 0    #default value 0
         author = cleaned_data.get('author')
         if not author:
             self._errors['author'] = 'author is empty!'
@@ -45,11 +44,12 @@ class WriteArticle(forms.Form):
 def articleCreate(request):
     print 'articleCreate start....'
 
-    form = WriteArticle(request.POST)
-    flag = form.is_valid()
+    data = WriteArticle(request.POST)
+    print(data.errors)
+    flag = data.is_valid()
     print (flag)
     if flag:
-        ac = form.cleaned_data
+        ac = data.cleaned_data
         ta = articleDomain.articleInfo.convertToArticle(ac)
         #flag = False
         content = StringUtil.escapeScript(ta.getPrTy('content'))
@@ -59,11 +59,13 @@ def articleCreate(request):
         last_id = service.saveArticle(ta)
         
     return render_to_response('article/post_success.html',{'last_id':last_id},context_instance=RequestContext(request))
-    
-def getArticle(request):
+'''    
+def getArticleDetail(request):
     article_id = forms.IntegerField()
     result = service.getArticleById(article_id)
+    detail = {}
     if result:
-        
-    
+        detail = {"articleDetail",result}
+    return render_to_response('article/article_detail.html',detail,context_instance=RequestContext(request))
+'''    
     

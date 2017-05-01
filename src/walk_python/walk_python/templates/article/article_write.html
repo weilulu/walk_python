@@ -26,7 +26,7 @@
       <form class="form" method="post" action="/article/write">{% csrf_token %}
        
         title:<input type="text" name="title" class="form-control" placeholder="Text input" />
-        type:<input type="text" name="type" class="form-control" placeholder="Text input" />
+        article_type:<input type="text" name="article_type" class="form-control" placeholder="Text inputs" />
         author:<input type="text" name="author" class="form-control" placeholder="Text input" />
         content:<textarea name="content" class="form-control" rows="16"></textarea>
        <button class="btn btn-lg btn-primary btn-block" type="submit">POST</button>

@@ -4,3 +4,8 @@ beautifulsoup4-4.5.3(not used)
 BeautifulSoup-3.2.1
 textrank4zh:0.3
 SQLAlchemy:1.1.9
+
+when create_engine,should set charset,or you'll get garbberish when insert chinese char!!!
+
+textrank4zh garbberish:
+http://www.crifan.com/unicodeencodeerror_gbk_codec_can_not_encode_character_in_position_illegal_multibyte_sequence/
