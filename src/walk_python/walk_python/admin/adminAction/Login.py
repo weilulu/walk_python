@@ -9,6 +9,9 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from datetime import datetime
 from django import forms
+
+from walk_python.admin.adminService import service
+
 def toLogin(request):
     print '>>>to login'
     now = datetime.now()
@@ -30,5 +33,6 @@ class Login(forms.Form):
 
 def index(request):
     data = Login(request.POST)
-    print data
+    print(isinstance(data, dict))
+    service.queryAdmin(data)
     return render_to_response('user/start.html',{'test':''},context_instance=RequestContext(request))

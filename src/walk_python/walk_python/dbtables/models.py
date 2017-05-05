@@ -123,5 +123,8 @@ def executeSelectSql(selectSql,isFetchAll=False,conn=None,defaultReturn=None):
 articleW = metaWrite.tables['article_info']
 articleR = metaRead.tables['article_info']
 
+adminR = metaRead.tables['article_admin']
+adminW = metaWrite.tables['article_admin']
+
 if __name__ == '__main__':
     pass
