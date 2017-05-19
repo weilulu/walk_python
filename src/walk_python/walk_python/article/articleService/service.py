@@ -12,12 +12,3 @@ def saveArticle(articleParam):
         if last_id:
             return last_id
     return None    
-'''
-def getArticleById(article_id):
-    if article_id:
-        article = articleDao.getArticleById(article_id)
-        if article:
-            return article
-        else:
-            return None  
-'''     

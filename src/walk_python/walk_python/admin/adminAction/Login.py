@@ -11,6 +11,7 @@ from datetime import datetime
 from django import forms
 
 from walk_python.admin.adminService import service
+from walk_python.admin.adminDomain import adminUser
 
 def toLogin(request):
     print '>>>to login'
@@ -33,6 +34,10 @@ class Login(forms.Form):
 
 def index(request):
     data = Login(request.POST)
-    print(isinstance(data, dict))
-    service.queryAdmin(data)
+    flag = data.is_valid()
+    print 'flag:%s' % flag
+    if flag:
+        info = data.cleaned_data
+        u = adminUser.adminInfo.convertToAdminUser(info)
+        service.queryAdmin(u)
     return render_to_response('user/start.html',{'test':''},context_instance=RequestContext(request))
