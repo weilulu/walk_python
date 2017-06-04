@@ -80,44 +80,44 @@ def executeInsertSql(selSql,conn=None):
     return None            
 
 
-@connectionFunctionNew(False, 'conn')
+#@connectionFunctionNew(True, 'conn')
 def executeSelectSql(selectSql,isFetchAll=False,conn=None,defaultReturn=None):
-    if selectSql:
-        if isinstance(selectSql,Select) or isinstance(selectSql,CompoundSelect):
-            if conn:
+    #if selectSql:
+    if isinstance(selectSql,Select) or isinstance(selectSql,CompoundSelect):
+        if conn:
+            rss = None
+            try:
+                if isFetchAll:
+                    rss = conn.execute(selectSql).fetchall()
+                else:
+                    rss = conn.execute(selectSql).fetchone()    
+            except Exception,data:
+                print data
                 rss = None
-                try:
-                    if isFetchAll:
-                        rss = conn.execute(selectSql).fetchall()
-                    else:
-                        rss = conn.execute(selectSql).fetchone()    
-                except Exception,data:
-                    print data
-                    rss = None
-                finally:
-                    closeConnection(conn)
-                if rss:
-                    if not isFetchAll:
-                        rs = {}
-                        if isinstance(rss,RowProxy):
-                            for k,v in rss.items():
-                                k = str(k)
-                            rs[k] = v        
-                        return rs
-                    else:
-                        rs = []
-                        for val in rss:
-                            if isinstance(val,RowProxy):
-                                trs = {}
-                                for k,v in val.items():
-                                    if isinstance(k,unicode):
-                                        k = str(k)
-                                    trs[k] = v
-                                if trs:
-                                    rs.append(trs)
-                        return rs
-                    return rss
-                return defaultReturn
+            finally:
+                closeConnection(conn)
+            if rss:
+                if not isFetchAll:
+                    rs = {}
+                    if isinstance(rss,RowProxy):
+                        for k,v in rss.items():
+                            k = str(k)
+                        rs[k] = v        
+                    return rs
+                else:
+                    rs = []
+                    for val in rss:
+                        if isinstance(val,RowProxy):
+                            trs = {}
+                            for k,v in val.items():
+                                if isinstance(k,unicode):
+                                    k = str(k)
+                                trs[k] = v
+                            if trs:
+                                rs.append(trs)
+                    return rs
+                return rss
+            return defaultReturn
             
 
 articleW = metaWrite.tables['article_info']

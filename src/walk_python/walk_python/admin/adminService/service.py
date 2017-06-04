@@ -7,8 +7,12 @@ from walk_python.admin.adminDomain.adminUser import adminInfo
 from walk_python.admin.adminDao import adminDao
 
 def queryAdmin(userInfo):
-    rs = {}
     if userInfo and isinstance(userInfo, adminInfo):
-        adminDao.queryAdmin(userInfo) 
+        count = adminDao.queryAdmin(userInfo)
+        if count == 1:
+            return True
+        else:
+            return False
+         
          
     

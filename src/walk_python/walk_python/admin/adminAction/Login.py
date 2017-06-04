@@ -39,5 +39,11 @@ def index(request):
     if flag:
         info = data.cleaned_data
         u = adminUser.adminInfo.convertToAdminUser(info)
-        service.queryAdmin(u)
-    return render_to_response('user/start.html',{'test':''},context_instance=RequestContext(request))
+        flag = service.queryAdmin(u)
+        if flag:
+            name = u.getPrTy('userName')
+            return render_to_response('user/start.html',{'userName':name},context_instance=RequestContext(request))
+        else:
+            info = 'name or pwd was wrong!'
+            return render_to_response('user/login.html',{'errorInfo':info},context_instance=RequestContext(request))
+    

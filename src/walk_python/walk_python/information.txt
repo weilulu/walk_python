@@ -9,3 +9,9 @@ when create_engine,should set charset,or you'll get garbberish when insert chine
 
 textrank4zh garbberish:
 http://www.crifan.com/unicodeencodeerror_gbk_codec_can_not_encode_character_in_position_illegal_multibyte_sequence/
+
+sqlalchemy document:
+http://docs.sqlalchemy.org/en/latest/core/tutorial.html#sql-expression-language-tutorial
+
+django document:
+https://django.readthedocs.io/en/1.4/
