@@ -21,7 +21,7 @@ def startWrite(request):
 class WriteArticle(forms.Form):
     print 'start here.........'
     title = forms.CharField()
-    type = forms.IntegerField()
+    category = forms.IntegerField()
     author = forms.CharField()
     content = forms.Field()
     def clean(self):
@@ -29,9 +29,9 @@ class WriteArticle(forms.Form):
         title = cleaned_data.get('title')
         if not title:
             self._errors['title'] = 'title is empty!'
-        type = cleaned_data.get('type')
-        if not isinstance(type, (int,long)):
-            type = 0    #default value 0
+        category = cleaned_data.get('category')
+        if not isinstance(category, (int,long)):
+            category = 0    #default value 0
         author = cleaned_data.get('author')
         if not author:
             self._errors['author'] = 'author is empty!'
@@ -57,8 +57,8 @@ def articleCreate(request):
         ta.setPrTy('content',content)
         ta.setPrTy('summary',summary)
         last_id = service.saveArticle(ta)
-        
-    return render_to_response('article/post_success.html',{'last_id':last_id},context_instance=RequestContext(request))
+        return render_to_response('article/post_success.html',{'last_id':last_id},context_instance=RequestContext(request))
+    return render_to_response('article/post_fail.html',{'error_info':'error'},context_instance=RequestContext(request))
 '''    
 def getArticleDetail(request):
     article_id = forms.IntegerField()

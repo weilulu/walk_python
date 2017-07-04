@@ -419,30 +419,37 @@
                     
                       <div class="form quick-post">
                                       <!-- Edit profile form (not working)-->
-                                      <form class="form-horizontal">
+                                      <form class="form-horizontal" method="post" action="/article/write">{% csrf_token %}
                                           <!-- Title -->
                                           <div class="form-group">
                                             <label class="control-label col-lg-2" for="title">Title</label>
                                             <div class="col-lg-10"> 
-                                              <input type="text" class="form-control" id="title">
+                                              <input type="text" class="form-control" id="title" name="title">
+                                            </div>
+                                          </div>   
+                                          <!-- Author -->
+                                          <div class="form-group">
+                                            <label class="control-label col-lg-2" for="author">Author</label>
+                                            <div class="col-lg-10"> 
+                                              <input type="text" class="form-control" id="author" name="author">
                                             </div>
                                           </div>   
                                           <!-- Content -->
                                           <div class="form-group">
                                             <label class="control-label col-lg-2" for="content">Content</label>
                                             <div class="col-lg-10">
-                                              <textarea class="form-control" id="content"></textarea>
+                                              <textarea class="form-control" id="content" name="content"></textarea>
                                             </div>
                                           </div>                           
                                           <!-- Cateogry -->
                                           <div class="form-group">
                                             <label class="control-label col-lg-2">Category</label>
                                             <div class="col-lg-10">                               
-                                                <select class="form-control">
+                                                <select class="form-control" name="category">
                                                   <option value="">- Choose Cateogry -</option>
-                                                  <option value="1">General</option>
-                                                  <option value="2">News</option>
-                                                  <option value="3">Media</option>
+                                                  <option value="1">技术</option>
+                                                  <option value="2">生活</option>
+                                                  <option value="3">休闲</option>
                                                   <option value="4">Funny</option>
                                                 </select>  
                                             </div>
