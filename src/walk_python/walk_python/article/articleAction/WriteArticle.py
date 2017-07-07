@@ -21,7 +21,7 @@ def startWrite(request):
 class WriteArticle(forms.Form):
     print 'start here.........'
     title = forms.CharField()
-    category = forms.IntegerField()
+    category = forms.Field()
     author = forms.CharField()
     content = forms.Field()
     tag = forms.Field()
@@ -31,8 +31,8 @@ class WriteArticle(forms.Form):
         if not title:
             self._errors['title'] = 'title is empty!'
         category = cleaned_data.get('category')
-        if not isinstance(category, (int,long)):
-            category = 0    #default value 0
+        if not category:
+            self._errors['category'] = 'category is empty!'
         author = cleaned_data.get('author')
         if not author:
             self._errors['author'] = 'author is empty!'
@@ -42,7 +42,6 @@ class WriteArticle(forms.Form):
         tag = cleaned_data.get('tag')
         if not tag:
             self._errors['tag'] = 'tag is empty!'
-        tag = cleaned_data.get('tag')
         return cleaned_data
     
 def articleCreate(request):
