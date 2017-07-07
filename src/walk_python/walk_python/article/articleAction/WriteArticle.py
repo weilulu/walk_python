@@ -24,6 +24,7 @@ class WriteArticle(forms.Form):
     category = forms.IntegerField()
     author = forms.CharField()
     content = forms.Field()
+    tag = forms.Field()
     def clean(self):
         cleaned_data = self.cleaned_data
         title = cleaned_data.get('title')
@@ -38,7 +39,10 @@ class WriteArticle(forms.Form):
         content = cleaned_data.get('content')
         if not content:
             self._errors['content'] = 'content is empty!'
-        
+        tag = cleaned_data.get('tag')
+        if not tag:
+            self._errors['tag'] = 'tag is empty!'
+        tag = cleaned_data.get('tag')
         return cleaned_data
     
 def articleCreate(request):

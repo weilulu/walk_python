@@ -19,17 +19,4 @@ def saveArticle(articleParam):
             print 'last id ----'
             return rss.lastrowid
     return None
-
-''' 
-def getArticleById(article_id):
-    if article_id <= 0:
-        return None
-    rs = None
-    selSql = articleR.select().where(article_id)
-    result = models.executeSelectSql(selSql)
-    if result:
-        rs = result.convertToArticle(result)
-        return rs
-    else:
-        return None
-'''        
+      

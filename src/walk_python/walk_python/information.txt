@@ -4,6 +4,7 @@ beautifulsoup4-4.5.3(not used)
 BeautifulSoup-3.2.1
 textrank4zh:0.3
 SQLAlchemy:1.1.9
+redis 2.10.5(easy_install redis)
 
 when create_engine,should set charset,or you'll get garbberish when insert chinese char!!!
 
@@ -15,3 +16,6 @@ http://docs.sqlalchemy.org/en/latest/core/tutorial.html#sql-expression-language-
 
 django document:
 https://django.readthedocs.io/en/1.4/
+
+some tech with python:
+https://objectrocket.com/docs/

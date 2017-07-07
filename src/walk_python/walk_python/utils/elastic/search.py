@@ -32,7 +32,7 @@ def test():
 	    print data
 	
 def getArticleIndex():
-    res = es.get(index="article-index",doc_type="article_content",id=2)
+    res = es.get(index="article_index",doc_type="article_content",id=2)
 	
     print(res)
 	
