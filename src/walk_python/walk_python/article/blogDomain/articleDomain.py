@@ -11,18 +11,16 @@ from walk_python.baseObject.baseDomain import BaseObject
 
      
 class articleInfo(BaseObject):
-    __slots__=('id','title','category','author','summary','content','tag','create_time','post_time','is_init','_prykeys')
-    _prykeys={'id':(int,long),'title':str,'category':str,'author':str,'summary':str,'content':str,'tag':str,'create_time':str,'post_time':datetime,'is_init':bool,'_prykeys':dict}
+    __slots__=('id','title','author','summary','content','create_time','post_time','is_init','_prykeys')
+    _prykeys={'id':(int,long),'title':str,'author':str,'summary':str,'content':str,'create_time':str,'post_time':datetime,'is_init':bool,'_prykeys':dict}
     
     def __init__(self):
         BaseObject.__init__(self)
         self.id = 0
         self.title = ''
-        self.category = ''
         self.author = ''
         self.summary = ''
         self.content = ''
-        self.tag = ''
         self.create_time = ''
         self.post_time = None
         self.is_init = True     

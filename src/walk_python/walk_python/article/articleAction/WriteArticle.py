@@ -53,22 +53,21 @@ def articleCreate(request):
     print (flag)
     if flag:
         ac = data.cleaned_data
+        category = ac['category']
+        tag = ac['tag']
+        ac.pop('category',None)
+        ac.pop('tag',None)
         ta = articleDomain.articleInfo.convertToArticle(ac)
         #flag = False
         content = StringUtil.escapeScript(ta.getPrTy('content'))
         summary = StringUtil.genSummary(content)
         ta.setPrTy('content',content)
         ta.setPrTy('summary',summary)
-        last_id = service.saveArticle(ta)
-        return render_to_response('article/post_success.html',{'last_id':last_id},context_instance=RequestContext(request))
+        articleEntity = service.saveArticle(ta)
+        if articleEntity:
+            service.createIndex(articleEntity)
+            service.saveCategoryAndTag(category,tag,articleEntity)
+            return render_to_response('article/post_success.html',{'last_id':articleEntity.getPrty('id')},context_instance=RequestContext(request))
     return render_to_response('article/post_fail.html',{'error_info':'error'},context_instance=RequestContext(request))
-'''    
-def getArticleDetail(request):
-    article_id = forms.IntegerField()
-    result = service.getArticleById(article_id)
-    detail = {}
-    if result:
-        detail = {"articleDetail",result}
-    return render_to_response('article/article_detail.html',detail,context_instance=RequestContext(request))
-'''    
+ 
     

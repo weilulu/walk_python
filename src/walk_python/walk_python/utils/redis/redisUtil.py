@@ -38,6 +38,9 @@ def hashSave(key1,key2,data):
     r.execute()
     print 'key1:%s,key2:%s,data:%s' % (key1,key2,data)
     
+def getV():
+    conn = getRedisConn();
+    conn.hget() 
             
 if __name__ == '__main__':
     hashSave('1', '2', 'test')            

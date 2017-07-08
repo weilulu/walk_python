@@ -21,6 +21,9 @@ def saveArticle(articleParam):
         articleParam.setPrTy('create_time',_time)      
         last_id = articleDao.saveArticle(articleParam)
         if last_id:
+            articleParam.setPrTy('id',last_id)
+            return articleParam
+            '''
             articleDict = articleParam.convertToDict(keyList=articleParam.getDictKeys(False))
             articleDict['id'] = last_id
             articleJson = json.dumps(articleDict)
@@ -35,5 +38,24 @@ def saveArticle(articleParam):
             tag_key = articleParam.getPrTy('tag')
             redisUtil.hashSave(category_key,tag_key,articleParam)
         return last_id
+            '''
+        return None
     return None
- 
+def createIndex(article):
+    '''
+    index with elastic
+    '''
+    articleDict = article.convertToDict(keyList=article.getDictKeys(False))
+    articleJson = json.dumps(articleDict)
+    docId = article.getPrTy('id')
+    indexFlag = search.createArticleIndex(articleJson,docId)
+    if not indexFlag:
+        print 'the id of mysql is:%s' % (docId)
+    
+    
+def saveCategoryAndTag(category_key,tag_key,article):
+    '''
+    add data into redis
+    '''
+    redisUtil.hashSave(category_key,tag_key,article)    
+    
