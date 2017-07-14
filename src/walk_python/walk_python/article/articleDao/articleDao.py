@@ -19,4 +19,10 @@ def saveArticle(articleParam):
             print 'last id ----'
             return rss.lastrowid
     return None
-      
+def saveCategory(article_id,category):
+    _dict = {'article_id':article_id,'name':category}
+    sql = models.categoryW.insert().values(_dict)
+    rss = models.executeInsertSql(sql)
+    if rss:
+        print rss.lastrowid
+             

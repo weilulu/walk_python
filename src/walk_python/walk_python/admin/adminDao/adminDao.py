@@ -6,7 +6,7 @@ Created on 2017.5.4
 
 from walk_python.dbtables import models
 from walk_python.admin.adminDomain.adminUser import adminInfo
-from sqlalchemy import select,and_
+from sqlalchemy import select
 
 def queryAdmin(userInfo):
     if userInfo and isinstance(userInfo, adminInfo):

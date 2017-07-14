@@ -126,5 +126,7 @@ articleR = metaRead.tables['article_info']
 adminR = metaRead.tables['article_admin']
 adminW = metaWrite.tables['article_admin']
 
+categoryR= metaRead.tables['article_category']
+categoryW= metaWrite.tables['article_category']
 if __name__ == '__main__':
     pass

@@ -24,7 +24,7 @@ class WriteArticle(forms.Form):
     category = forms.Field()
     author = forms.CharField()
     content = forms.Field()
-    tag = forms.Field()
+    #tag = forms.Field()
     def clean(self):
         cleaned_data = self.cleaned_data
         title = cleaned_data.get('title')
@@ -40,8 +40,8 @@ class WriteArticle(forms.Form):
         if not content:
             self._errors['content'] = 'content is empty!'
         tag = cleaned_data.get('tag')
-        if not tag:
-            self._errors['tag'] = 'tag is empty!'
+        #if not tag:
+            #self._errors['tag'] = 'tag is empty!'
         return cleaned_data
     
 def articleCreate(request):
@@ -54,9 +54,9 @@ def articleCreate(request):
     if flag:
         ac = data.cleaned_data
         category = ac['category']
-        tag = ac['tag']
+        #tag = ac['tag']
         ac.pop('category',None)
-        ac.pop('tag',None)
+        #ac.pop('tag',None)
         ta = articleDomain.articleInfo.convertToArticle(ac)
         #flag = False
         content = StringUtil.escapeScript(ta.getPrTy('content'))
@@ -65,9 +65,10 @@ def articleCreate(request):
         ta.setPrTy('summary',summary)
         articleEntity = service.saveArticle(ta)
         if articleEntity:
+            service.saveCategory(articleEntity.getPrTy('id'),category)
             service.createIndex(articleEntity)
-            service.saveCategoryAndTag(category,tag,articleEntity)
-            return render_to_response('article/post_success.html',{'last_id':articleEntity.getPrty('id')},context_instance=RequestContext(request))
+            service.saveCategoryInRedis(category,articleEntity)
+            return render_to_response('article/post_success.html',{'last_id':articleEntity.getPrTy('id')},context_instance=RequestContext(request))
     return render_to_response('article/post_fail.html',{'error_info':'error'},context_instance=RequestContext(request))
  
     

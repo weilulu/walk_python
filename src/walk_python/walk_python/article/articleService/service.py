@@ -41,6 +41,8 @@ def saveArticle(articleParam):
             '''
         return None
     return None
+def saveCategory(article_id,category):
+    articleDao.saveCategory(article_id,category)
 def createIndex(article):
     '''
     index with elastic
@@ -53,9 +55,9 @@ def createIndex(article):
         print 'the id of mysql is:%s' % (docId)
     
     
-def saveCategoryAndTag(category_key,tag_key,article):
+def saveCategoryInRedis(category_key,article):
     '''
     add data into redis
     '''
-    redisUtil.hashSave(category_key,tag_key,article)    
+    redisUtil.hashSave(category_key,article)    
     

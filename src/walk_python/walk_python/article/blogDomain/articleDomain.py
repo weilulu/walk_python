@@ -21,6 +21,8 @@ class articleInfo(BaseObject):
         self.author = ''
         self.summary = ''
         self.content = ''
+        #self.category = ''
+        #self.tag = ''
         self.create_time = ''
         self.post_time = None
         self.is_init = True     
