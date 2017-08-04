@@ -9,6 +9,11 @@ redis 2.10.5(easy_install redis)
 yum install MySQL-python
 Package MySQL-python.x86_64 0:1.2.3-0.3.c1.1.el6 will be installed
 
+pip install elasticsearch==5.4.0
+
+pip install uwsgi
+uwsgi-2.0.15
+
 when create_engine,should set charset,or you'll get garbberish when insert chinese char!!!
 
 textrank4zh garbberish:

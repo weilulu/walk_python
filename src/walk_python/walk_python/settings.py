@@ -91,6 +91,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     'D:/Workspaces/walk_python/src/walk_python/walk_python/static/',
+    
 ]
 
 TEMPLATE_DIRS = (

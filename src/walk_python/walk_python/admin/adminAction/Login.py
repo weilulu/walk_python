@@ -47,3 +47,5 @@ def index(request):
             info = 'name or pwd was wrong!'
             return render_to_response('user/login.html',{'errorInfo':info},context_instance=RequestContext(request))
     
+#def add(request):
+    
