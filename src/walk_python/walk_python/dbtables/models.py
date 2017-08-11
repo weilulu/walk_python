@@ -11,10 +11,10 @@ from sqlalchemy.sql import text
 
 #charset=utf8 should set charset,or you'll get gibberish
 
-#dbr = create_engine("mysql://root:root@127.0.0.1:3306/walk-management?charset=utf8",pool_size=50,max_overflow=100,echo=True,pool_timeout=10)
-#dbw = create_engine("mysql://root:root@127.0.0.1:3306/walk-management?charset=utf8",pool_size=50,max_overflow=100,echo=True,pool_timeout=10)
-dbr = create_engine("mysql://root:83ba6247fa@59.110.216.62:3306/walk_management?charset=utf8",pool_size=50,max_overflow=100,echo=True,pool_timeout=10)
-dbw = create_engine("mysql://root:83ba6247fa@59.110.216.62:3306/walk_management?charset=utf8",pool_size=50,max_overflow=100,echo=True,pool_timeout=10)
+dbr = create_engine("mysql://root:root@127.0.0.1:3306/walk-management?charset=utf8",pool_size=50,max_overflow=100,echo=True,pool_timeout=10)
+dbw = create_engine("mysql://root:root@127.0.0.1:3306/walk-management?charset=utf8",pool_size=50,max_overflow=100,echo=True,pool_timeout=10)
+#dbr = create_engine("mysql://root:83ba6247fa@59.110.216.62:3306/walk_management?charset=utf8",pool_size=50,max_overflow=100,echo=True,pool_timeout=10)
+#dbw = create_engine("mysql://root:83ba6247fa@59.110.216.62:3306/walk_management?charset=utf8",pool_size=50,max_overflow=100,echo=True,pool_timeout=10)
 
 metaRead = MetaData(bind=dbr,reflect=True)
 metaWrite = metaRead

@@ -37,7 +37,21 @@ def hashSave(key,data):
     #jsonStr = json.dumps(d)
     print 'timeS:%s,jsonStr:%s' % (timeScore,d)
     conn.zadd(key,timeScore,d)
-    
+
+def strSave(key,value):
+    '''
+       save,type string
+    '''
+    conn = getRedisConn()
+    flag = conn.set(key, value)
+    print 'strsave flag:%s' % flag 
+def strGet(key):
+    '''
+       get,type string
+    '''
+    conn = getRedisConn()
+    return conn.get(key)
+       
 def getV(key1,key2):
     conn = getRedisConn();
     print(conn.hget(key1,key2)) 
@@ -45,10 +59,14 @@ def getV(key1,key2):
  
 def testRedis():
     conn = getRedisConn()
-    conn.hset('key1','key2','value')    
+    conn.hset('key1','key2','value') 
+def getStrKey(key):
+    conn  = getRedisConn()
+    print conn.get(key)   
 if __name__ == '__main__':
     #testRedis()
     #getV('key1','key2')
+    '''
     conn = getRedisConn()
     t = time.strptime('2017-07-10 10:26:57', '%Y-%m-%d %H:%M:%S')
     t1 = time.strptime('2017-07-10 10:38:25', '%Y-%m-%d %H:%M:%S')
@@ -62,3 +80,5 @@ if __name__ == '__main__':
     
     print(score)            
     print(score1)            
+    '''
+    getStrKey('1') 

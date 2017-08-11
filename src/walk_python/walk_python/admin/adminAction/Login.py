@@ -39,11 +39,30 @@ def index(request):
     if flag:
         info = data.cleaned_data
         u = adminUser.adminInfo.convertToAdminUser(info)
-        flag = service.queryAdmin(u)
-        if flag:
+        userId = service.queryAdmin(u)
+        print 'userId:%s' % userId
+        if userId:
             name = u.getPrTy('userName')
-            return render_to_response('user/start.html',{'userName':name},context_instance=RequestContext(request))
+            service.saveLoginer(userId,name)
+            #return render_to_response('user/start.html',{'userName':name},context_instance=RequestContext(request))
+            return render_to_response('user/index.html',{'userId':userId,'userName':name},context_instance=RequestContext(request))
         else:
             info = 'name or pwd was wrong!'
             return render_to_response('user/login.html',{'errorInfo':info},context_instance=RequestContext(request))
-    
+def welcome(request):
+    loginId = request.GET['id']
+    print 'login id %s:' % loginId
+    name = service.getLoger(loginId)
+    print name
+    if name:
+        return render_to_response('user/index.html',{'userId':loginId,'userName':name},context_instance=RequestContext(request))
+    else:
+        return render_to_response('user/login.html',{'errorInfo':''},context_instance=RequestContext(request))
+def write(request):
+    loginId = request.GET['id']
+    print 'login id %s:' % loginId
+    name = service.getLoger(loginId)
+    if name:
+        return render_to_response('article/write.html',{'userId':loginId,'userName':name},context_instance=RequestContext(request))
+    else:
+        return render_to_response('user/login.html',{'errorInfo':''},context_instance=RequestContext(request))

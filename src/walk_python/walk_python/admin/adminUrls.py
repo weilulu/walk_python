@@ -12,5 +12,7 @@ from django.contrib.auth import login
 urlpatterns = patterns('',
                        (r'^login',Login.toLogin),
                        (r'^index',Login.index),
+                       (r'^welcome',Login.welcome),
+                       (r'^write',Login.write),
                        )
 
