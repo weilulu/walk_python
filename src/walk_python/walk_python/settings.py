@@ -24,7 +24,8 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-PROJECT_ROOT = 'D:/Workspaces/walk_python/src/walk_python/walk_python'
+#PROJECT_ROOT = 'D:/Workspaces/walk_python/src/walk_python/walk_python'
+PROJECT_ROOT = '/home/walk_python/src/walk_python/walk_python'
 
 
 ALLOWED_HOSTS = []
@@ -90,7 +91,9 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    'D:/Workspaces/walk_python/src/walk_python/walk_python/static/',
+
+    #'D:/Workspaces/walk_python/src/walk_python/walk_python/static/',
+    '/home/walk_python/src/walk_python/walk_python/static',
     
 ]
 
