@@ -17,11 +17,11 @@ TAG_REDIS_KEY = 'tag_key_'
 def getRedisConn():
     try:
         conn = redis.StrictRedis(
-            host='localhost',
-            port=6379
-            #host='59.110.216.62',
-            #port=6379,
-            #password='a9564ebc3289b7a14551baf8ad5ec60a'
+            #host='localhost',
+            #port=6379
+            host='59.110.216.62',
+            port=6379,
+            password='a9564ebc3289b7a14551baf8ad5ec60a'
             )
         print conn
         return conn
