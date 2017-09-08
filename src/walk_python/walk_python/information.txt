@@ -27,3 +27,10 @@ https://django.readthedocs.io/en/1.4/
 
 some tech with python:
 https://objectrocket.com/docs/
+
+A article about django:
+
+http://djangobook.py3k.cn
+
+中文乱码的一个说明，不过没试：
+http://wps2015.org/2015/06/18/the-problem-of-python-chinese/
